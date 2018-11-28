@@ -1,6 +1,6 @@
 
 multi_login() {
-  local other_logins=$(jq -r '.source.other_logins // []' < test.json)
+  local other_logins=$(jq -r '.source.other_logins // []' < $payload)
   IFS=$'\n'
   for obj in $(echo "$other_logins" | jq -r '.[] | .registry+","+.username+","+.password'); do
     local reg=$(echo $obj | awk -F, '{print $1}')
